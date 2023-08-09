@@ -1,3 +1,21 @@
+use ndata::dataobject::*;
+use std::path::Path;
+use ndata::dataarray::DataArray;
+use flowlang::base64::Base64;
+use flowlang::flowlang::system::unique_session_id::unique_session_id;
+use crate::automatic1111::automatic1111::settings::get_settings;
+use flowlang::datastore::DataStore;
+
+pub fn execute(o: DataObject) -> DataObject {
+let a0 = o.get_string("prompt");
+let a1 = o.get_int("author_id");
+let ax = render(a0, a1);
+let mut o = DataObject::new();
+o.put_object("a", ax);
+o
+}
+
+pub fn render(prompt:String, author_id:i64) -> DataObject {
 let mut meta = DataStore::globals().get_object("system").get_object("apps").get_object("automatic1111").get_object("runtime");
 let baseurl;
 if meta.has("baseurl") { baseurl = meta.get_string("baseurl"); }
@@ -82,3 +100,5 @@ else {
 }
 
 o
+}
+

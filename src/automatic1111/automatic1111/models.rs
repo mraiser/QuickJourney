@@ -1,3 +1,17 @@
+use ndata::dataobject::*;
+use ndata::dataarray::DataArray;
+use crate::automatic1111::automatic1111::settings::get_settings;
+use flowlang::datastore::DataStore;
+
+pub fn execute(o: DataObject) -> DataObject {
+let a0 = o.get_int("author_id");
+let ax = models(a0);
+let mut o = DataObject::new();
+o.put_string("a", &ax);
+o
+}
+
+pub fn models(author_id:i64) -> String {
 let mut meta = DataStore::globals().get_object("system").get_object("apps").get_object("automatic1111").get_object("runtime");
 let baseurl;
 if meta.has("baseurl") { baseurl = meta.get_string("baseurl"); }
@@ -25,3 +39,5 @@ if resp.is_ok() {
   return s;
 }
 format!("ERROR {:?}", resp).to_string()
+}
+
