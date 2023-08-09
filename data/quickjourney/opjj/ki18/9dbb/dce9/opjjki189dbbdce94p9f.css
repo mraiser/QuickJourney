@@ -1,0 +1,15 @@
+.outwrap {
+  display: table;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.inwrap {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.wrapimg {
+  max-width:100vw;
+  max-height:100vh;
+}
